@@ -1,0 +1,82 @@
+= Paging DSL
+
+A grammar and parser for URL based paging
+
+== Syntax
+
+.BNF Grammar
+----
+
+ROOT ::=
+    SORT ROOT
+    | FILTER ROOT
+    | PAGE ROOT
+
+SORT ::=
+    "sort" "(" SORT_EXPRS ")"
+    | ; empty
+
+SORT_EXPRS ::=
+    SORT_EXPRS_NE
+    | ; empty
+
+SORT_EXPRS_NE ::=
+    SORT_EXPR "," SORT_EXPRS_NE
+    | SORT_EXPR
+
+SORT_EXPR ::=
+    ID SORT_OPTIONS
+
+SORT_OPTIONS ::=
+    SORT_OPTION SORT_OPTIONS
+    | ; empty
+
+SORT_OPTION ::=
+    "asc"
+    | "desc"
+    | "null first"
+    | "null last"
+    | "alphanumeric"
+
+FILTER ::=
+    "filter" "(" OR_EXPR ")"
+    | ; empty
+
+OR_EXPR ::=
+    | AND_EXPR "or" OR_EXPR
+    | AND_EXPR
+    | "(" OR_EXPR ")"
+
+AND_EXPR ::=
+    | FILTER_TERM "and" AND_EXPR
+    | FILTER_TERM
+
+FILTER_TERM ::=
+    "eq" "(" ID "," STRING ")"
+    | "starts_with" "(" ID "," STRING ")"
+    | "ends_with" "(" ID "," STRING ")"
+    | "contains" "(" ID "," STRING ")"
+    | ID
+    | "not" "(" OR_EXPR ")"
+
+LITERAL ::=
+    STRING
+    | NUMBER
+    | "true"
+    | "false"
+
+PAGE ::=
+    "page" "(" INT "by" INT ")"
+    | ; empty
+
+NUMBER ::=
+    NUMBER_NO_LEADIONG
+    | NUMBER_WITH_LEADIONG
+
+ID :: = [a-zA-Z]+[a-zA-Z0-9\-_]*
+INT :: = [0-9]+
+STRING ::= [^\n]+
+NUMBER_NO_LEADIONG ::= [.][0-9]+
+NUMBER_WITH_LEADIONG ::= [0-9]+([.][0-9]+)?
+
+----
