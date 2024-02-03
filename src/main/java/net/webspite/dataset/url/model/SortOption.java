@@ -5,5 +5,5 @@ public enum SortOption {
     Descending,
     NullsFirst,
     NullsLast,
-    AlphaNumeric
+    Alphanumeric
 }

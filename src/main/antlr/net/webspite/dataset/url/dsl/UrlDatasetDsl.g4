@@ -1,4 +1,4 @@
-grammar DatasetUrlDsl;
+grammar UrlDatasetDsl;
 
 @header {
 package net.webspite.dataset.url.dsl;
@@ -54,12 +54,7 @@ sort
     ;
 
 sort_exprs
-    : sort_exprs_ne
-    | /* empty */
-    ;
-
-sort_exprs_ne
-    : sort_expr ',' sort_exprs_ne
+    : sort_expr ',' sort_exprs
     | sort_expr
     ;
 
@@ -103,7 +98,7 @@ number
     | INT
     ;
 
-ID : [a-zA-Z]+[a-zA-Z0-9\-_]* ;
+ID : [a-zA-Z]+[a-zA-Z0-9\-_.]* ;
 INT : [0-9]+ ;
 DECIMAL : [0-9]*[.][0-9]+ ;
 

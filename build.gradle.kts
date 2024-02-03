@@ -1,6 +1,8 @@
 plugins {
     `java-library`
     `antlr`
+    kotlin("jvm") version "1.9.22"
+    id("me.champeau.jmh") version "0.7.2"
 }
 
 repositories {
@@ -20,18 +22,12 @@ tasks.generateGrammarSource {
 }
 
 dependencies {
-
     antlr("org.antlr:antlr4:4.13.1")
-    testImplementation("org.antlr:antlr4:4.13.1")
 
-    // Use JUnit Jupiter for testing.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api("org.apache.commons:commons-math3:3.6.1")
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation("com.google.guava:guava:30.1.1-jre")
+    //testImplementation ("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation ("io.kotest:kotest-runner-junit5:5.8.0")
+    testImplementation ("io.kotest:kotest-assertions-core:5.8.0")
+    testImplementation ("io.kotest:kotest-property:5.8.0")
 }
 
 tasks.test {
