@@ -5,5 +5,3 @@ on:
 jobs:
   call-workflow-1-in-local-repo:
     uses: bodin/workflows/.github/workflows/java.build.yml@master
-    with:
-      java-version: '21'
