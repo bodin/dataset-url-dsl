@@ -3,5 +3,5 @@ on:
   - workflow_dispatch
 
 jobs:
-  call-workflow-1-in-local-repo:
-    uses: bodin/workflows/.github/workflows/java.build.yml@master
+  build:
+    uses: bodin/workflows/.github/workflows/build-gradle.yml@master
